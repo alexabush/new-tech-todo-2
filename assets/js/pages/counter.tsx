@@ -3,6 +3,10 @@ import { Link } from 'react-router-dom';
 
 import Main from '../components/Main';
 
+// import socket from '../socket';
+// console.log('in counter');
+// console.log('socket', socket);
+
 // Interface for the Counter component state
 interface CounterState {
   currentCount: number;

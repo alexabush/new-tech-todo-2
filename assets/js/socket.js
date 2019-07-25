@@ -6,9 +6,8 @@
 //
 // Pass the token on params as below. Or remove it
 // from the params if you are not using authentication.
-import {Socket} from "phoenix"
-
-let socket = new Socket("/socket", {params: {token: window.userToken}})
+import { Socket } from 'phoenix';
+let socket = new Socket('/socket', { params: { token: window.userToken } });
 
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
@@ -52,12 +51,39 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 //     end
 //
 // Finally, connect to the socket:
-socket.connect()
-
+socket.connect();
+console.log('in sockem.js');
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
+let channel = socket.channel('room:lobby', {});
+let chatInput = document.querySelector('#chat-input');
+let messagesContainer = document.querySelector('#messages');
+// debugger;
 
-export default socket
+// chatInput.addEventListener('keyup', event => {
+//   console.log(event.target);
+//   console.log(`key ${event.target.value} pressed!`);
+//   if (event.keyCode === 13) {
+//     console.log('form submitted!!');
+//     channel.push('new_msg', { body: chatInput.value });
+//     chatInput.value = '';
+//   }
+// });
+
+// channel.on('new_msg', payload => {
+//   console.log('recieved new message from server!!');
+//   console.log(`${payload.body}`);
+//   let messageItem = document.createElement('li');
+//   messageItem.innerText = `[${Date()}] ${payload.body}`;
+//   messagesContainer.appendChild(messageItem);
+// });
+
+channel
+  .join()
+  .receive('ok', resp => {
+    console.log('Joined successfully', resp);
+  })
+  .receive('error', resp => {
+    console.log('Unable to join', resp);
+  });
+
+export default socket;

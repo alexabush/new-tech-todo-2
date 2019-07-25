@@ -5,6 +5,7 @@ import Header from './components/Header';
 import HomePage from './pages';
 import CounterPage from './pages/counter';
 import FetchDataPage from './pages/fetch-data';
+import DisplayMessagePage from './pages/DisplayMessagePage';
 
 const Root: React.FC = () => (
   <>
@@ -13,6 +14,7 @@ const Root: React.FC = () => (
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/counter" component={CounterPage} />
+        <Route path="/messages" component={DisplayMessagePage} />
         <Route path="/fetch-data" component={FetchDataPage} />
       </Switch>
     </BrowserRouter>
